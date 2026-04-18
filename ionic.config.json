@@ -1,0 +1,7 @@
+{
+  "name": "muiv-simple-project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

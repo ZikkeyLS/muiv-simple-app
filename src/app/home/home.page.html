@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Справочник (Полянский Сергей Ильич ИД23.1/Б3-23)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <!-- Форма -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Добавить запись</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="form-content">
+      <ion-item>
+        <ion-label position="floating">Имя</ion-label>
+        <ion-input [(ngModel)]="newItem.name" placeholder="Введите имя"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input [(ngModel)]="newItem.email" placeholder="Введите email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Телефон</ion-label>
+        <ion-input [(ngModel)]="newItem.phone" placeholder="Введите телефон"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="addRow()" [disabled]="!isFormValid()">
+        Добавить строку
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Справочник (таблица) -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Справочник ({{ dataSource.length }} записей)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="header-row">
+          <ion-col><strong>Имя</strong></ion-col>
+          <ion-col><strong>Email</strong></ion-col>
+          <ion-col><strong>Телефон</strong></ion-col>
+          <ion-col size="auto"><strong>Действие</strong></ion-col>
+        </ion-row>
+        
+        <ion-row *ngFor="let item of dataSource; let i = index">
+          <ion-col>{{ item.name }}</ion-col>
+          <ion-col>{{ item.email }}</ion-col>
+          <ion-col>{{ item.phone }}</ion-col>
+          <ion-col size="auto">
+            <ion-button color="danger" size="small" (click)="deleteRow(i)">
+              Удалить
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row *ngIf="dataSource.length === 0">
+          <ion-col class="empty-message">
+            Нет данных. Добавьте первую запись.
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Вывод в формате JSON -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Вывод</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="primary">
+        <pre>Текущие данные в формате JSON:<br>{{ dataSource | json }}</pre>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
