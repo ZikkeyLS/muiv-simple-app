@@ -13,6 +13,6 @@ ionic build --prod
 ionic capacitor add android
 ionic capacitor build android
 
-# Build iOS
+## Build iOS
 ionic capacitor add ios
 ionic capacitor build ios
